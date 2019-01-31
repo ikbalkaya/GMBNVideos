@@ -2,6 +2,7 @@ package com.ikbal.gmbnvideos.api;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface YoutubeApi {
     /**
@@ -10,4 +11,7 @@ public interface YoutubeApi {
     @GET("search?key="+ApiConstants.API_KEY+"&channelId="+ApiConstants.CHANNEL_ID+
             "&part=snippet&fields="+ApiConstants.SEARCH_FIELDS+"&order=date")
     Call<YoutubeVideoResponse> listChannelVideos();
+
+    @GET("videos?key="+ApiConstants.API_KEY+"&part=snippet,contentDetails")
+    Call<YoutubeVideoResponse> videoById(@Query("id")String id);
 }

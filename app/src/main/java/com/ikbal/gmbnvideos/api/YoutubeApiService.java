@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class YoutubeApiService {
-    public interface SearchSuccessListener {
+    public interface ApiSuccessListener {
         void onVideos(List<YoutubeVideo> videos);
     }
 
@@ -19,10 +19,22 @@ public class YoutubeApiService {
         void onFail(String failMessage);
     }
 
-    public void listChannelVideos(@NonNull SearchSuccessListener successListener,
+    public void listChannelVideos(@NonNull ApiSuccessListener successListener,
                                   @NonNull SearchFailedListener failedListener) {
         final YoutubeApi apiRef = apiRef();
-        apiRef.listChannelVideos().enqueue(new Callback<YoutubeVideoResponse>() {
+        final Call<YoutubeVideoResponse> searchCall = apiRef.listChannelVideos();
+        doCall(successListener, failedListener, searchCall);
+
+    }
+    public void getVideo(String videoId,@NonNull ApiSuccessListener successListener,
+                                  @NonNull SearchFailedListener failedListener) {
+        final YoutubeApi apiRef = apiRef();
+        final Call<YoutubeVideoResponse> videoCall = apiRef.videoById(videoId);
+        doCall(successListener, failedListener, videoCall);
+    }
+
+    private void doCall(@NonNull ApiSuccessListener successListener, @NonNull SearchFailedListener failedListener, Call<YoutubeVideoResponse> searchCall) {
+        searchCall.enqueue(new Callback<YoutubeVideoResponse>() {
             @Override
             public void onResponse(Call<YoutubeVideoResponse> call, Response<YoutubeVideoResponse> response) {
                 if (response.isSuccessful()){
@@ -40,8 +52,8 @@ public class YoutubeApiService {
                  }
             }
         });
-
     }
+
     private YoutubeApi apiRef(){
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiConstants.BASE_URL)

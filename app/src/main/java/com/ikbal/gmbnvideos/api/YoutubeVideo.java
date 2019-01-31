@@ -1,14 +1,29 @@
 package com.ikbal.gmbnvideos.api;
 
 import com.google.gson.annotations.SerializedName;
+
+
 /**
 A light version of video object * */
 public class YoutubeVideo {
     private Id id;
+
+    private String videoId;
     private Snippet snippet;
+    private ContentDetails contentDetails;
+    private String publishedAt;
+    private String description;
 
     public Id getId() {
         return id;
+    }
+
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public ContentDetails getContentDetails() {
+        return contentDetails;
     }
 
     public Snippet getSnippet() {
@@ -33,6 +48,13 @@ public class YoutubeVideo {
 
         public Thumbnails getThumbnails() {
             return thumbnails;
+        }
+    }
+    public class ContentDetails{
+        private String duration;
+
+        public String getDuration() {
+            return duration;
         }
     }
     public class Thumbnails{

@@ -53,7 +53,9 @@ public class VideoListActivity extends AppCompatActivity {
     }
 
     private void onVideoItemClick(YoutubeVideo video) {
-        startActivity(new Intent(this,VideoDetailActivity.class));
+        final Intent intent = new Intent(this, VideoDetailActivity.class);
+        intent.putExtra(VideoDetailActivity.EXTRA_VIDEO_ID,video.getId().getVideoId());
+        startActivity(intent);
     }
 
 
