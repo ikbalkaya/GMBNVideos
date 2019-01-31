@@ -8,9 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ikbal.gmbnvideos.api.YoutubeVideo;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewAdapter.VideoViewHolder> {
+    private final List<YoutubeVideo> videos;
+
+    public VideosRecyclerViewAdapter(List<YoutubeVideo> videos) {
+        this.videos = videos;
+    }
+
     interface OnItemClickListener {
         void onItemClick(int position);
     }
@@ -46,7 +55,7 @@ class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewA
 
     @Override
     public int getItemCount() {
-        return 88;
+        return videos.size();
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

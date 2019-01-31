@@ -4,7 +4,21 @@ import com.google.gson.annotations.SerializedName;
 /**
 A light version of video object * */
 public class YoutubeVideo {
-    private int id;
+    private Id id;
+    private Snippet snippet;
+    private Thumbnails thumbnails;
+
+    public Id getId() {
+        return id;
+    }
+
+    public Snippet getSnippet() {
+        return snippet;
+    }
+
+    public Thumbnails getThumbnails() {
+        return thumbnails;
+    }
 
     class Id{
         private String videoId;
