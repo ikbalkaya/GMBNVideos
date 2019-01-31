@@ -11,6 +11,12 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewAdapter.VideoViewHolder> {
+    interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    private OnItemClickListener onItemClickListener;
+
 
     @NonNull
     @Override
@@ -23,7 +29,15 @@ class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewA
 
     @Override
     public void onBindViewHolder(@NonNull VideoViewHolder videoViewHolder, int i) {
-        videoViewHolder.videoTitleTextView.setText("Video number "+(i+1));
+        final int position = i;
+        videoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) onItemClickListener.onItemClick(position);
+            }
+        });
+
+        videoViewHolder.videoTitleTextView.setText("Video number " + (i + 1));
         Picasso.get().load("https://img.youtube.com/vi/JOlc0a2eVTo/sddefault.jpg")
                 .placeholder(R.drawable.video_placeholder)
                 .into(videoViewHolder.videoImageView);
@@ -35,9 +49,14 @@ class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewA
         return 88;
     }
 
-    class VideoViewHolder extends RecyclerView.ViewHolder{
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    class VideoViewHolder extends RecyclerView.ViewHolder {
         ImageView videoImageView;
         TextView videoTitleTextView;
+
         public VideoViewHolder(@NonNull View itemView) {
             super(itemView);
             videoImageView = itemView.findViewById(R.id.videoImageView);

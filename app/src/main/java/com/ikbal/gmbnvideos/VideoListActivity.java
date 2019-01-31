@@ -1,5 +1,6 @@
 package com.ikbal.gmbnvideos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,8 +21,17 @@ public class VideoListActivity extends AppCompatActivity {
         videosRecyclerView = findViewById(R.id.videosRecyclerView);
         layoutManager = new LinearLayoutManager(this);
         videosRecyclerView.setLayoutManager(layoutManager);
-        videosRecyclerView.setAdapter(new VideosRecyclerViewAdapter());
+        final VideosRecyclerViewAdapter adapter = new VideosRecyclerViewAdapter();
+        videosRecyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(this::onVideoItemClick);
+
+
+
+    }
+
+    private void onVideoItemClick(int position) {
+        startActivity(new Intent(this,VideoDetailActivity.class));
     }
 
 
