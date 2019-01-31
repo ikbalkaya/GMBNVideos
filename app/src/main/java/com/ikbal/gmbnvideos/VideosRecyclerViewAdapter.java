@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewAdapter.VideoViewHolder> {
 
     @NonNull
@@ -21,6 +23,10 @@ class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewA
 
     @Override
     public void onBindViewHolder(@NonNull VideoViewHolder videoViewHolder, int i) {
+        videoViewHolder.videoTitleTextView.setText("Video number "+(i+1));
+        Picasso.get().load("https://img.youtube.com/vi/JOlc0a2eVTo/sddefault.jpg")
+                .placeholder(R.drawable.video_placeholder)
+                .into(videoViewHolder.videoImageView);
 
     }
 
