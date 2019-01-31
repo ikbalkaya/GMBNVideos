@@ -6,7 +6,6 @@ A light version of video object * */
 public class YoutubeVideo {
     private Id id;
     private Snippet snippet;
-    private Thumbnails thumbnails;
 
     public Id getId() {
         return id;
@@ -16,25 +15,27 @@ public class YoutubeVideo {
         return snippet;
     }
 
-    public Thumbnails getThumbnails() {
-        return thumbnails;
-    }
 
-    class Id{
+    public class Id{
         private String videoId;
 
         public String getVideoId() {
             return videoId;
         }
     }
-    class Snippet{
+    public class Snippet{
         private String title;
+        private Thumbnails thumbnails;
 
         public String getTitle() {
             return title;
         }
+
+        public Thumbnails getThumbnails() {
+            return thumbnails;
+        }
     }
-    class Thumbnails{
+    public class Thumbnails{
         @SerializedName("default")
         private Thumbnail defaultThumbnail;
         private Thumbnail medium;
@@ -52,7 +53,7 @@ public class YoutubeVideo {
             return high;
         }
     }
-    class Thumbnail{
+    public class Thumbnail{
         private String url;
         private int width;
         private int height;

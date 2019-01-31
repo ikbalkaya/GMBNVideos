@@ -21,7 +21,7 @@ class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewA
     }
 
     interface OnItemClickListener {
-        void onItemClick(int position);
+        void onVideoItemClick(YoutubeVideo video);
     }
 
     private OnItemClickListener onItemClickListener;
@@ -38,16 +38,13 @@ class VideosRecyclerViewAdapter extends RecyclerView.Adapter<VideosRecyclerViewA
 
     @Override
     public void onBindViewHolder(@NonNull VideoViewHolder videoViewHolder, int i) {
-        final int position = i;
-        videoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onItemClickListener != null) onItemClickListener.onItemClick(position);
-            }
+        final YoutubeVideo video = videos.get(i);
+        videoViewHolder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) onItemClickListener.onVideoItemClick(video);
         });
 
-        videoViewHolder.videoTitleTextView.setText("Video number " + (i + 1));
-        Picasso.get().load("https://img.youtube.com/vi/JOlc0a2eVTo/sddefault.jpg")
+        videoViewHolder.videoTitleTextView.setText(video.getSnippet().getTitle());
+        Picasso.get().load(video.getSnippet().getThumbnails().getDefaultThumbnail().getUrl())
                 .placeholder(R.drawable.video_placeholder)
                 .into(videoViewHolder.videoImageView);
 

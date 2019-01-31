@@ -52,7 +52,7 @@ public class VideoListActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    private void onVideoItemClick(int position) {
+    private void onVideoItemClick(YoutubeVideo video) {
         startActivity(new Intent(this,VideoDetailActivity.class));
     }
 
