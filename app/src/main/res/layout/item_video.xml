@@ -18,8 +18,8 @@
         android:layout_gravity="bottom"
         tools:text="This is video title"
         android:gravity="center_vertical"
-        android:layout_marginLeft="@dimen/title_left_margin"
+        android:paddingLeft="@dimen/title_left_margin"
         android:textColor="@color/title_text_color"
         android:background="@color/title_bg_color"
-        android:layout_marginStart="@dimen/title_left_margin" />
+        android:paddingStart="@dimen/title_left_margin" />
 </FrameLayout>
